@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Love Login</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <form id="login-form">
+        <label for="code">Enter Your Name:</label>
+        <input type="text" id="code" placeholder="Your Name">
+        <button id="submit-btn">Login</button>
+    </form>
+    <div id="result"></div>
+    <script>
+        const form = document.getElementById('login-form');
+        const codeInput = document.getElementById('code');
+        const submitBtn = document.getElementById('submit-btn');
+        const resultDiv = document.getElementById('result');
+
+
+        const secretCode = "Priyanka";
+        const nextPageUrl = "main.html";
+
+        form.addEventListener("submit", (e) =>{
+            e.preventDefault();
+            const userInput = codeInput.value.trim();
+            if (userInput.toLowerCase() === secretCode.toLowerCase()){
+                resultDiv.innerHTML = "Baby";
+                window.location.href = nextPageUrl;
+            } else {
+                resultDiv.innerHTML = "Naa Tum meri baby nahi hoo kon hoooo tum kaha hai meri sona";
+            }
+        });
+
+        //falling emojis
+        function createFallingEmoji() {
+            const emojis = ['❤️', '💖', '💘', '💕', '💞', '💓', '💗', '😍'];
+            const emoji = document.createElement('div');
+            emoji.classList.add("falling-emoji");
+            emoji.innerText= emojis[Math.floor(Math.random() * emojis.length)];
+            emoji.style.left = Math.random()* 100 + 'vw';
+            emoji.style.animationDuration = (Math.random() * 3+2) + 's';
+            document.body.appendChild(emoji);
+           setTimeout(() => emoji.remove(), 5000);
+
+
+           setInterval(createFallingEmoji, 500);
+        }
+    </script>
+</body>
+</html>

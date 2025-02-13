@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Message by Vishal</title>
+  <style>
+*{
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  min-height: 100dvh;
+  perspective: 1000px;
+  font: 1em/1.4 "Poppins", sans-serif;
+  overflow: hidden;
+  color: hsl(180 68% 5%);
+  background-image: radial-gradient(
+      circle farthest-corner at 50% 50%,
+      hsl(187 20% 88%) 30%,
+      hsl(149 20% 94%) 100%
+  );
+}
+
+.book {
+  position: relative;
+  display: flex;
+  margin: auto;
+  width: 42cqmin; /* Increased width */
+  pointer-events: none;
+  transform-style: preserve-3d;
+  transition: translate 1s;
+  translate: calc(min(var(--c), 1) * 50%) 0%;
+  rotate: 1 0 0 30deg;
+}
+
+.page {
+  --thickness: 4;
+  flex: none;
+  display: flex;
+  width: 100%;
+  font-size: 2.2cqmin; /* Slightly increased font size */
+  pointer-events: all;
+  user-select: none;
+  transform-style: preserve-3d;
+  transform-origin: left center;
+  transition: transform 1s,
+      rotate 1s ease-in calc((min(var(--i), var(--c)) - max(var(--i), var(--c))) * 50ms);
+  translate: calc(var(--i) * -100%) 0px 0px;
+  transform: translateZ(calc((var(--c) - var(--i) - 0.5) * calc(var(--thickness) * 0.23cqmin)));
+  rotate: 0 1 0 calc(clamp(0, var(--c) - var(--i), 1) * -180deg);
+}
+
+.front,
+.back {
+  position: relative;
+  flex: none;
+  width: 100%;
+  backface-visibility: hidden;
+  overflow: hidden;
+  background-color: #fff;
+  translate: 0px;
+}
+.back {
+  translate: -100% 0;
+  rotate: 0 1 0 180deg;
+}
+
+.book {
+  counter-reset: page -1;
+}
+
+.book a {
+  color: inherit;
+}
+
+.page {
+  box-shadow: 0em 0.5em 1em -0.2em #00000020;
+}
+
+.front,
+.back {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: space-between;
+  padding: 2em;
+  border: 1px solid #0002;
+}
+
+.front:has(img),
+.back:has(img) {
+  padding: 0;
+}
+.front img,
+.back img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.front::after,
+.back::after {
+  position: absolute;
+  bottom: 1em;
+  counter-increment: page;
+  content: counter(page) ".";
+  font-size: 0.8em;
+}
+
+.cover::after {
+  content: "";
+}
+
+.front::after {
+  right: 1em;
+}
+
+.front {
+  background: linear-gradient(to left, #f7f7f7 80%, #eee 100%);
+  border-radius: 0.1em 0.5em 0.5em 0.1em;
+}
+
+.back::after {
+  left: 1em;
+}
+
+.back {
+  background-image: linear-gradient(to right, #f7f7f7 80%, #eee 100%);
+  border-radius: 0.5em 0.1em 0.1em 0.5em;
+}
+.cover {
+  background: radial-gradient(
+          circle farthest-corner at 80% 20%,
+          hsl(150 80% 20% / 0.3) 0%,
+          hsl(170 60% 10% / 0.1) 100%
+      ),
+      hsl(231, 32%, 29%) url("./cover.jpg") 50% / cover;
+  color: hsl(0, 100%, 30%); /* Dark red text color for cover page */
+}
+
+h1,
+h2,
+h3 {
+  margin-bottom: 1px;
+  color: hsl(0, 100%, 30%); /* Dark red heading color */
+}
+
+p {
+  margin-top: 1px;
+  margin-bottom: 8px;
+  line-height: 1.4;
+  color: hsl(0, 100%, 30%); /* Dark red text color for paragraphs */
+}
+
+.front,
+.back {
+  padding: 1.5em;
+  color: hsl(0, 100%, 30%); /* Dark red text color for front and back pages */
+}
+
+.book {
+  width: 40cqmin; /* Slightly increased width */
+}
+
+.page {
+  font-size: 2cqmin; /* Slightly increased font size */
+}
+
+p:last-child {
+  margin-bottom: 0;
+}
+.front,
+.back {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 1.5em;
+}
+
+h2 {
+  margin-bottom: 5px;
+}
+
+p {
+  margin-top: 5px;
+  line-height: 1.4;
+}
+
+
+body {
+  margin: 0;
+  display: flex;
+  min-height: 100dvh;
+  perspective: 1000px;
+  font: 1em/1.4 "Poppins", sans-serif;
+  overflow: hidden;
+  color: hsl(180 68% 5%);
+  background: linear-gradient(to right, #ff7eb9, #ff65a3, #ff165d);
+  background-size: 400% 400%;
+  animation: gradientAnimation 10s ease infinite;
+}
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Emoji Animation */
+.emoji {
+  position: absolute;
+  font-size: 3rem;
+  opacity: 0;
+  animation: floatEmojis 6s ease-in-out infinite;
+}
+@keyframes floatEmojis {
+  0% {
+    transform: translateY(100px);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(-100px) rotate(20deg);
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateY(100px);
+    opacity: 1;
+  }
+}
+/* Add random timing for each emoji */
+.emoji:nth-child(1) {
+  animation-delay: 0s;
+  left: 10%;
+}
+.emoji:nth-child(2) {
+  animation-delay: 1s;
+  left: 20%;
+}
+.emoji:nth-child(3) {
+  animation-delay: 2s;
+  left: 30%;
+}
+.emoji:nth-child(4) {
+  animation-delay: 3s;
+  left: 40%;
+}
+.emoji:nth-child(5) {
+  animation-delay: 4s;
+  left: 50%;
+}
+.emoji:nth-child(6) {
+  animation-delay: 5s;
+  left: 60%;
+}
+.emoji:nth-child(7) {
+  animation-delay: 6s;
+  left: 70%;
+}
+.emoji:nth-child(8) {
+  animation-delay: 7s;
+  left: 80%;
+}
+.emoji:nth-child(9) {
+  animation-delay: 8s;
+  left: 90%;
+}
+
+
+
+
+  </style>
+</head>
+<body>
+  <div class="book">
+    <div class="page">
+      <div class="front cover">
+        <h1 style="color: rgb(255,255,255); 
+        text-shadow: 5px 2px 5px rgb(0,0,0);" 
+        
+        >A Message for You🤍</h1>
+
+        <p style="color: rgb(255,255,255); 
+        text-shadow: 5px 2px 5px rgb(0,0,0);" >2025. <br> Vishal
+        </p>
+      </div>
+      <div class="black">
+        <h2>A Special Beginning ❤️✨</h2>
+        <p>Kuch log life me aa jate hai pata hi nahi chalta, jaise aap aaye meri life me. Mene aap jaisi ladki nahi jo sach me genuinly kisi se pyar ker sakti hai bina kuch chahe,kind hoo sweet hoo bohot pyari ho nadan bhi, hamari baat kaise shuru hui thi yaad hai mujhe, smjh nahi aa rha ki kya kahu per kuch na kuch to likhunga. 💖</p>
+        <p>
+         Hamari pehli baat January 4th  2024 koo hui insta pe, <br> mere msg kerne ke 2 din baad apka reply aaya tha ......
+        </p>
+      </div>
+    </div>
+    <!-- 2nd page -->
+     <div class="page">
+      <div class="front">
+        <h2>Anjaan se Special hone tak ❤️✨</h2>
+        <p>
+          Pichle saal se pehle tak me to apko janta tak nahi tha aur mene to kabhi socha hi nhi tha ki aapse baatein karunga aapko jaanunga chahunga socha hi nhi tha bilkul bhi, baat hone se pehle jaisa me apke baare me sochta tha aap waisi hi ho innocent ladki nadan si dusro se alag , socha nhi tha ki aapse milunga , per ab jaan gya hu ki aap jaisa pyar mujhe koi ladki nahi ker sakti 💖 apki baaton se hi mere chehre pe smile aa jati hai.
+        </p>
+      </div>
+      <div class="back">
+        <img src="/1.jpg" alt="img 1">
+      </div>
+     </div>
+
+     <!-- 3rd page -->
+      <div class="page">
+        <div class="front">
+          <h2>The Magic of You ✨💖</h2>
+          <p>
+            Kuch to baat hai aapme , matlab words me to me smjha nhi sakta per haan ,alag hoo bakiyo se bohot gehri aakhen hai aapki smile bohot pyari hai jisko to me hamesha hi dekhna chahta huu, aap jab mere saath hoti ho mujhe achha lagta hai, sukoon milta hai, sab kuch acha lgne laga hai mujhe ab , ab to me jab bhi dekhta hu apko mujhe kuch hone sa lagta hai , aapka hi magic hua hai mere pe
+          </p>
+        </div>
+        <div class="back">
+          <h2>Strong Girl</h2>
+          <p>Aap sach me strong ho, even kai baar mene shayad kuch essa keh diya ho jisse apko bura laga hoo ya ussi raat ko dekh lo bina kuch soche keh diya mene ki me so rha hu , aapko bura laga tha janta mujhe bhi laga tha, per fir bhi apke mann me mere liye pyar jara sa bhi kam nhi hua ye chiz me realize ker chuka huu ✨💖, strong ho sach me per ab me hu apke saath </p>
+        </div>
+      </div>
+
+      <!-- 4th page -->
+       <div class="page">
+        <div class="front">
+          <h2>The Best Part of My Day🤞💖 </h2>
+          <p>
+            aapse baat kerna ab meri life ka part ban chuka hai ya kahu ki mera hissa ban chuka hai , socha nhi tha ek ladki se itni sari baatein kahunga pr sach me ho rahi hai ye chize , apke msg dekhte hi chehre per ab smile aa jati hai kuch to ho gya hai mujhe, aap kitni sundar ho iska jawab yahi dunga ki meri aakhon me pura Jachti hoo aap mujhe sabse jaydda pyari lagne lagi hoooo. 💕
+          </p>
+        </div>
+        <div class="back">
+          <img src="/2.jpg" alt="img 2">
+        </div>
+       </div>
+
+       <!-- 5th page  -->
+        <div class="page">
+          <div class="front">
+            <h1>A Wish 💫💖</h1>
+            <p>
+             kabhi kabhi to lagta hai ki bohot acha hua Jo bhi hua mere saath, jabhi to aap mile mujheee , 1 saal ho gya ek dusre se baat krte hue shayad aap to pehle din se hi mujhe pasand kerte the janta huu, mere dil aap wo jagah bana chuki ho yahi wish hai ki aapki smile me daily dekhu, aapko daily sunu, aapki aakhon me khoya rhu aapka hi rahu hamesha. 💕
+            </p>
+          </div>
+          <div class="back">
+            <h1>I am all Your's now</h1>
+            <p>Ab me bss apka hoke rehna chahta huu , khud se jayada apko khush dekhna chahhta huuu </p>
+          </div>
+        </div>
+
+        <!-- 6th page  -->
+         <div class="page">
+          <div class="front">
+            <h2>The Beauty of You ✨💖</h2>
+            <p>
+              kya hum thoda ruk ke aapki tarif me kuch kahe !! , haahaha jitni bhi kero kam hi padegi apki tarif, koi gussa nhi aap me koi ego nhi kuch nahi, sab kuch side rkh ke aap khud se mujhe msg kerte the hamesha se shuru se mujhe acha lagta tha , aap me innerbeauty hai thodi extraordinary hoo aap essa pyar to mujhe kabhi nhi kiya kisi ne kis ladki ne, mujhe meri maa jaisa pyar kerne ke liye shukriyaa, aapse me bhi utna hi pyar krunga , pr aap jayada kerna hehehe! ✨💖
+            </p>
+          </div>
+          <div class="back">
+            <h2>Undefine Beauty</h2>
+            <p>
+              Aap ko mene jayadatar modern dress me hi dekha hai aur aap  mujhe usme bohot jayda achi lagti hoo bohot jayda, top aur jeans acha lagta hai aap pe per saree acha nahi bohot achha lagega aap pe mujhe dekhna aapko pink saree pehne , aur apke hairs abhi jitne hai mujhe utne hi bohot pasand, aap chaho to badha sakti ho mujhe tab bhi achi lagogi. 💕✨
+            </p>
+          </div>
+         </div>
+
+         <!-- 7th page  -->
+          <div class="page">
+            <div class="front">
+              <h2>Grateful for You 🌹❤</h2>
+              <p>
+                Me bohot khushnaseeb hu jo aap mujhe mili mujhse jo pyar kiya, sach me khush mujhe bhi pyar ho hi gya aapse ❤, 5 february ko realise hua mujhe jealous feel hua tha apko aur uss ladke ko dekh ke ussi time realize hua ki bss ab yahi hai wo ladki jisse mujhe pyar krne hai wo bhi hamesha ke liye <br> "Me tere itna pass aana chahta hu, Jitna pass tere tu bhi khud nhi" 💕✨
+
+
+            
+              </p>
+            </div>
+            <div class="back">
+              <h2>Will You Be Mine?</h2>
+              <p>
+                uss pal se jabse hamari baatein shuru hui ye to mene realise hi nhi kiya tha ki iss ladki ke liye itna feel kerne lagunga itna sochne lagunga nahi socha tha per sach hai sapna sa lag rha tha ab to me apse past se bhi nikl chuka hu aur ab apna present aur future apke saath dekh rha hu, I LOVE YOU 🌹❤ , Will You Be Mine Forever? 💖💕
+              </p>
+            </div>
+          </div>
+          <div class="page">
+            <div class="front">
+              <img src="/3.jpg" alt="img 1">
+            </div>
+            <div class="back cover">
+              <h3>Cutest Queen</h3>
+              <p>
+                Jo bhi likha hai mene likha hai.
+              </p><br>
+            </div>
+          </div>
+  </div>
+
+
+  <div class="emoji">❤️‍🔥</div>
+  <div class="emoji">🫶🏻</div>
+  <div class="emoji">❤️</div>
+  <div class="emoji">😘</div>
+  <div class="emoji">👨‍❤️‍💋‍👨</div>
+  <div class="emoji">💓</div>
+  <div class="emoji">❣️</div>
+  <div class="emoji">💘</div>
+  <div class="emoji">💖</div>
+  <div class="emoji">💙</div>
+  <div class="emoji">💚</div>
+  <div class="emoji">🥰</div>
+  <div class="emoji">💗</div>
+
+
+  <script>
+    const flipBook = (elBook) =>{
+      elBook.style.setProperty("--c", 0)//
+      elBook.querySelectorAll(".page").forEach((page,idx)=>{
+        page.style.setProperty("--i", idx);
+        page.addEventListener("click", (evt)=>{
+          if (evt.target.closest("a")) return;
+          const curr = evt.target.closest(".back") ? idx : idx + 1;
+          elBook.style.setProperty("--c", curr);
+        });
+      });
+    };
+    document.querySelectorAll(".book").forEach(flipBook);
+  </script>
+</body>
+</html>
